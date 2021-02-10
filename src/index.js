@@ -20,7 +20,12 @@ class Character {
 
   /*キャラクターが死んでいる場合は攻撃出来ないので、それを表示する。死んでいない場合は相手に与えたダメージを表示。相手が死んだ場合は相手に与えたダメージと死んだことを表示する。*/
   attack(defender) {
-    if (this.hp === 0) {//死んだ場合
+    // まず引数thisの場合、攻撃キャラを取得するのか、防御キャラを取得するのかを認識します
+    console.log(`引数thisの名前: ${this.name}`);
+    console.log(`引数defenderの名前: ${defender.name}`);
+    // 関数attack呼び出しの記述を確認すると、fighter.attack(monster); とあるので、「fighterがmonsterに攻撃する」ということを意味することを踏まえると、thisは攻撃キャラ、defendは防御キャラということがわかります
+
+    if (this.hp === 0) {//死んだ場合 → 上記を踏まえるとthisだとどちらのキャラが死んだ場合になりますか？
       //console.log('攻撃できません')
     } else {//死んでない場合
       //console.log(ダメージ)
@@ -41,7 +46,7 @@ const fighter = new Character({
   offensePower: 15,
   defencePower: 10
 })
-fighter.attack();
+// fighter.attack(); 以下のインスタンス化されたCharacterの記述が呼び出しになります
 
 
 // class Sorcerer extends Character {
@@ -70,39 +75,39 @@ fighter.attack();
 //   }
 // }
 
-// {
-//   const fighter = new Character({
-//     name: '武道家',
-//     hp: 40,
-//     mp: 0,
-//     offensePower: 15,
-//     defencePower: 10
-//   })
-//   const sorcerer = new Sorcerer({
-//     name: '魔法使い',
-//     hp: 25,
-//     mp: 10,
-//     offensePower: 8,
-//     defencePower: 10
-//   })
-//   const monster = new Character({
-//     name: 'モンスター',
-//     hp: 60,
-//     mp: 0,
-//     offensePower: 30,
-//     defencePower: 10
-//   })
+{
+  const fighter = new Character({
+    name: '武道家',
+    hp: 40,
+    mp: 0,
+    offensePower: 15,
+    defencePower: 10
+  })
+  // const sorcerer = new Sorcerer({
+  //   name: '魔法使い',
+  //   hp: 25,
+  //   mp: 10,
+  //   offensePower: 8,
+  //   defencePower: 10
+  // })
+  const monster = new Character({
+    name: 'モンスター',
+    hp: 60,
+    mp: 0,
+    offensePower: 30,
+    defencePower: 10
+  })
 
-//   fighter.attack(monster);
-//   sorcerer.attack(monster);
-//   monster.attack(sorcerer);
-//   fighter.attack(monster);
-//   sorcerer.healSpell(sorcerer);
-//   monster.attack(fighter);
-//   fighter.attack(monster);
-//   sorcerer.fireSpell(monster);
-//   monster.attack(fighter);
-//   fighter.showStatus();
-//   sorcerer.showStatus();
-//   monster.showStatus();
-// }
+  fighter.attack(monster);
+  // sorcerer.attack(monster); sorcererの定義がまだなのでコメントアウトしています
+  // monster.attack(sorcerer);
+  fighter.attack(monster);
+  // sorcerer.healSpell(sorcerer);
+  monster.attack(fighter);
+  fighter.attack(monster);
+  // sorcerer.fireSpell(monster);
+  monster.attack(fighter);
+  fighter.showStatus();
+  // sorcerer.showStatus();
+  monster.showStatus();
+}
