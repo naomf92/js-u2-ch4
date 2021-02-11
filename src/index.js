@@ -10,12 +10,20 @@ class Character {
   }
 /*キャラクターの名前、HP、MPを表示する。*/
   showStatus() {
-    const element = document.getElementById('main');
-    element.innerHTML = `
+    //const element = document.getElementById('main');
+    // element.innerHTML = `
+    // <p>名前: ${this.name}</p>
+    // <p>HP: ${this.hp}</p>
+    // <p>MP: ${this.mp}</p>
+    // `;
+
+    const p = document.createElement('p');
+    p.innerHTML = `
     <p>名前: ${this.name}</p>
     <p>HP: ${this.hp}</p>
     <p>MP: ${this.mp}</p>
     `;
+    document.body.appendChild(p);
   }
 
   /*キャラクターが死んでいる場合は攻撃出来ないので、それを表示する。死んでいない場合は相手に与えたダメージを表示。相手が死んだ場合は相手に与えたダメージと死んだことを表示する。*/
@@ -39,15 +47,8 @@ class Character {
     */
   }
 }
-const fighter = new Character({
-  name: '武道家',
-  hp: 10,
-  mp: 0,
-  offensePower: 15,
-  defencePower: 10
-})
-// fighter.attack(); 以下のインスタンス化されたCharacterの記述が呼び出しになります
 
+//以下のインスタンス化されたCharacterの記述が呼び出しになります
 
 // class Sorcerer extends Character {
 //   constructor() {
