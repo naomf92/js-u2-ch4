@@ -10,13 +10,6 @@ class Character {
   }
 /*キャラクターの名前、HP、MPを表示する。*/
   showStatus() {
-    //const element = document.getElementById('main');
-    // element.innerHTML = `
-    // <p>名前: ${this.name}</p>
-    // <p>HP: ${this.hp}</p>
-    // <p>MP: ${this.mp}</p>
-    // `;
-
     const p = document.createElement('p');
     p.innerHTML = `
     <p>名前: ${this.name}</p>
@@ -28,16 +21,27 @@ class Character {
 
   /*キャラクターが死んでいる場合は攻撃出来ないので、それを表示する。死んでいない場合は相手に与えたダメージを表示。相手が死んだ場合は相手に与えたダメージと死んだことを表示する。*/
   attack(defender) {
-    // まず引数thisの場合、攻撃キャラを取得するのか、防御キャラを取得するのかを認識します
     console.log(`引数thisの名前: ${this.name}`);
     console.log(`引数defenderの名前: ${defender.name}`);
     // 関数attack呼び出しの記述を確認すると、fighter.attack(monster); とあるので、「fighterがmonsterに攻撃する」ということを意味することを踏まえると、thisは攻撃キャラ、defendは防御キャラということがわかります
 
-    if (this.hp === 0) {//死んだ場合 → 上記を踏まえるとthisだとどちらのキャラが死んだ場合になりますか？
-      //console.log('攻撃できません')
-    } else {//死んでない場合
-      //console.log(ダメージ)
+    // if (this.hp === 0 && defender.hp > 0) {//自分死んでいる&相手生きている
+    //   console.log('攻撃できないです');
+    // } else if (this.hp > 0 && defender.hp === 0) {//自分生きている&相手死んでいる
+    //   console.log(`${defender.name}死亡`);
+    //   console.log(`${this.offensePower}を与えました`);
+    // }
+
+    if (this.hp > 0) {//自分生きてる(相手は？)
+      console.log(`${defender.name}死亡`);
+      console.log(`${this.offensePower}を与えました`);
+    } else {//自分死んでる
+      console.log('攻撃できないです');
     }
+
+    //自分生きている、相手(defender)死んだ　(自分が相手に与えたダメージ)
+    //自分死んでいる、相手生きている　(攻撃不可)
+    //(自分生きている&相手生きている←？)
   }
 
   calcAttackDamage(defender) {
@@ -79,7 +83,7 @@ class Character {
 {
   const fighter = new Character({
     name: '武道家',
-    hp: 40,
+    hp: 0,//40
     mp: 0,
     offensePower: 15,
     defencePower: 10
@@ -93,14 +97,14 @@ class Character {
   // })
   const monster = new Character({
     name: 'モンスター',
-    hp: 60,
+    hp: 60,//60
     mp: 0,
     offensePower: 30,
     defencePower: 10
   })
 
   fighter.attack(monster);
-  // sorcerer.attack(monster); sorcererの定義がまだなのでコメントアウトしています
+  // sorcerer.attack(monster);
   // monster.attack(sorcerer);
   fighter.attack(monster);
   // sorcerer.healSpell(sorcerer);
