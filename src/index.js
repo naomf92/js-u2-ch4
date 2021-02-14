@@ -23,24 +23,14 @@ class Character {
   attack(defender) {
     console.log(`引数thisの名前: ${this.name}`);
     console.log(`引数defenderの名前: ${defender.name}`);
-    // 関数attack呼び出しの記述を確認すると、fighter.attack(monster); とあるので、「fighterがmonsterに攻撃する」ということを意味することを踏まえると、thisは攻撃キャラ、defendは防御キャラということがわかります
 
-    // if (this.hp === 0 && defender.hp > 0) {//自分死んでいる&相手生きている
-    //   console.log('攻撃できないです');
-    // } else if (this.hp > 0 && defender.hp === 0) {//自分生きている&相手死んでいる
-    //   console.log(`${defender.name}死亡`);
-    //   console.log(`${this.offensePower}を与えました`);
-    // }
-
-    // ここのブロックはthis（攻撃キャラ）の死亡した場合だけを取り扱う
-    if (this.hp > 0) {//自分生きてる(相手は？) → 相手が確実に死んでいることを示すには、条件式は相手が死んだ状態にするのが確実です
+    if (this.hp > 0 && defender.hp === 0) {//自分生きてる,相手死んでいる
       console.log(`${defender.name}死亡`);
       console.log(`${this.offensePower}を与えました`);
-    } else {//自分死んでる → elseではそれ以外なので「攻撃キャラがhp 0とそれ未満」「防御キャラがhp どの数値でも」が当てはまるので、条件式が必要そうです
+    } else if (this.hp === 0 && defender.hp > 0){//自分死んでる,相手生きている
       console.log('攻撃できないです');
+    } else {
     }
-
-    // ここのブロックはdefender（防御キャラ）の死亡した場合だけを取り扱う
 
     //自分生きている、相手(defender)死んだ　(自分が相手に与えたダメージ) → 上記で取り掛かります
     //自分死んでいる、相手生きている　(攻撃不可) → 上記で取り掛かります
