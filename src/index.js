@@ -24,17 +24,18 @@ class Character {
     console.log(`引数thisの名前: ${this.name}`);
     console.log(`引数defenderの名前: ${defender.name}`);
 
+    // 1と2は、それぞれ独立したif文ブロックで構成すると条件式の可読性が上がり、elseの返り値に困りません
     if (this.hp > 0 && defender.hp === 0) {//自分生きてる,相手死んでいる
       console.log(`${defender.name}死亡`);
       console.log(`${this.offensePower}を与えました`);
-    } else if (this.hp === 0 && defender.hp > 0){//自分死んでる,相手生きている
+    } else if (this.hp === 0 && defender.hp > 0){//自分死んでる,相手生きている → 誰が死んで攻撃できないのか出力すると良いですね
       console.log('攻撃できないです');
     } else {
     }
 
-    //自分生きている、相手(defender)死んだ　(自分が相手に与えたダメージ) → 上記で取り掛かります
-    //自分死んでいる、相手生きている　(攻撃不可) → 上記で取り掛かります
-    //(自分生きている&相手生きている←？) → calcAttackDamageを実装してから取り掛かります
+    //1. 自分生きている、相手(defender)死んだ　(自分が相手に与えたダメージ) → 上記で取り掛かります
+    //2. 自分死んでいる、相手生きている　(攻撃不可) → 上記で取り掛かります
+    //3. (自分生きている&相手生きている←？) → calcAttackDamageを実装してから取り掛かります
   }
 
   calcAttackDamage(defender) {
