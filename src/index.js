@@ -35,7 +35,7 @@ class Character {
 
   /*ダメージは単純に攻撃力から防御力を引いて計算する。ダメージが0未満の場合は、最低のダメージ1を与える*/
   calcAttackDamage(defender) {
-   let damage = this.offensePower - defender.defencePower;//ダメージ
+   let damage = this.offensePower - defender.defencePower;
    //console.log(damage);
 
    if (damage <= 0) {//ダメージ0未満なら
