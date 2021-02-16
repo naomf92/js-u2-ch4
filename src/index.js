@@ -21,28 +21,29 @@ class Character {
 
   /*キャラクターが死んでいる場合は攻撃出来ないので、それを表示する。死んでいない場合は相手に与えたダメージを表示。相手が死んだ場合は相手に与えたダメージと死んだことを表示する。*/
   attack(defender) {
-    console.log(`引数thisの名前: ${this.name}`);
-    console.log(`引数defenderの名前: ${defender.name}`);
+    //console.log(`引数thisの名前: ${this.name}`);
+    //console.log(`引数defenderの名前: ${defender.name}`);
 
-    if (this.hp > 0 && defender.hp === 0) {//自分生きてる,相手死んでいる
-      console.log(`${defender.name}死亡`);
-      console.log(`${this.offensePower}を与えました`);
-    } else if (this.hp === 0 && defender.hp > 0){//自分死んでる,相手生きている
-      console.log('攻撃できないです');
-    } else {
-    }
+    //攻撃しているキャラクターが死んだ場合
+    if (this.hp <= 0) console.log(`${this.name}は死亡したので攻撃できません`);
 
-    //自分生きている、相手(defender)死んだ　(自分が相手に与えたダメージ) → 上記で取り掛かります
-    //自分死んでいる、相手生きている　(攻撃不可) → 上記で取り掛かります
-    //(自分生きている&相手生きている←？) → calcAttackDamageを実装してから取り掛かります
+    //defenceしているキャラクターが死んだ場合
+    if (defender.hp <= 0) console.log(`${defender.name}死亡したので攻撃できません`);
+
+    this.calcAttackDamage(defender);
   }
 
+  /*ダメージは単純に攻撃力から防御力を引いて計算する。ダメージが0未満の場合は、最低のダメージ1を与える*/
   calcAttackDamage(defender) {
-    /*
-      ダメージは単純に攻撃力から防御力を引いて計算する。
-      ダメージが0未満の場合は、最低のダメージ1を与える。
-    */
+   let damage = this.offensePower - defender.defencePower;//ダメージ
+   //console.log(damage);
+
+   if (damage <= 0) {//ダメージ0未満なら
+      console.log(`ダメージは${damage+1}`);//最低１ダメージを与える
+   }
+
   }
+
 }
 
 //以下のインスタンス化されたCharacterの記述が呼び出しになります
@@ -76,7 +77,7 @@ class Character {
 {
   const fighter = new Character({
     name: '武道家',
-    hp: 0,//40
+    hp: 40,//40
     mp: 0,
     offensePower: 15,
     defencePower: 10
@@ -93,18 +94,18 @@ class Character {
     hp: 60,//60
     mp: 0,
     offensePower: 30,
-    defencePower: 10
+    defencePower: 10//10
   })
 
-  fighter.attack(monster);
+  //fighter.attack(monster);
   // sorcerer.attack(monster);
   // monster.attack(sorcerer);
   fighter.attack(monster);
   // sorcerer.healSpell(sorcerer);
   monster.attack(fighter);
-  fighter.attack(monster);
+  //fighter.attack(monster);
   // sorcerer.fireSpell(monster);
-  monster.attack(fighter);
+  //monster.attack(fighter);
   fighter.showStatus();
   // sorcerer.showStatus();
   monster.showStatus();
