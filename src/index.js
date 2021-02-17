@@ -21,28 +21,21 @@ class Character {
 
   /*キャラクターが死んでいる場合は攻撃出来ないので、それを表示する。死んでいない場合は相手に与えたダメージを表示。相手が死んだ場合は相手に与えたダメージと死んだことを表示する。*/
   attack(defender) {
-    //console.log(`引数thisの名前: ${this.name}`);
-    //console.log(`引数defenderの名前: ${defender.name}`);
-
-    //攻撃しているキャラクターが死んだ場合
-    if (this.hp <= 0) console.log(`${this.name}は死亡したので攻撃できません`);
-
-    //defenceしているキャラクターが死んだ場合
-    if (defender.hp <= 0) console.log(`${defender.name}死亡したので攻撃できません`);
+    if (this.hp <= 0) console.log(`${this.name}は死亡したので攻撃できません`); //攻撃しているキャラが死んだ場合
+    if (defender.hp <= 0) console.log(`${defender.name}死亡したので攻撃できません`);//defenceしているキャラが死んだ場合
 
     this.calcAttackDamage(defender);
+
+    //どちらも生きている
   }
 
   /*ダメージは単純に攻撃力から防御力を引いて計算する。ダメージが0未満の場合は、最低のダメージ1を与える*/
   calcAttackDamage(defender) {
    let damage = this.offensePower - defender.defencePower;
-   //console.log(damage);
+   if (damage <= 0) damage = 1;//ダメージ0未満なら
 
-   if (damage <= 0) {//ダメージ0未満なら
-      console.log(`ダメージは${damage+1}`);//最低１ダメージを与える → この処理はダメージが0未満に当てはまるときだけ処理されるので、1ダメージを追加するのではなく、ダメージを1に指定し代入です
-   }
    // インスタンスメソッドcalcAttackDamageが関数の戻り値として最終的に返す値を書くと良いですね
-
+   console.log(damage);
   }
 
 }
@@ -81,7 +74,7 @@ class Character {
     hp: 40,//40
     mp: 0,
     offensePower: 15,
-    defencePower: 10
+    defencePower: 10//10
   })
   // const sorcerer = new Sorcerer({
   //   name: '魔法使い',
