@@ -35,7 +35,7 @@ class Character {
    if (damage <= 0) damage = 1;//ダメージ0未満なら
 
    // インスタンスメソッドcalcAttackDamageが関数の戻り値として最終的に返す値を書くと良いですね
-   console.log(damage);
+   console.log(`${this.name}が${defender.name}に与えたダメージは${damage}`);
   }
 
 }
