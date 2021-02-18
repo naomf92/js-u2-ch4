@@ -34,7 +34,8 @@ class Character {
    let damage = this.offensePower - defender.defencePower;
    if (damage <= 0) damage = 1;//ダメージ0未満なら
 
-   // インスタンスメソッドcalcAttackDamageが関数の戻り値として最終的に返す値を書くと良いですね
+   // インスタンスメソッドcalcAttackDamageが関数の戻り値として最終的に返す値を書くと良いですね → ヒント: インスタンスメソッドcalcAttackDamageも、関数ですから、最終的に「返す値」が必要です
+   // ↓ これはインスランスメソッドattackが最終的に関数の返り値として返す値です
    console.log(`${this.name}が${defender.name}に与えたダメージは${damage}`);
   }
 
