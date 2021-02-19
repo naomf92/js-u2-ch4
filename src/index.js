@@ -28,7 +28,7 @@ class Character {
 
     //どちらも生きている
 
-    // ↓ これはインスランスメソッドattackが最終的に関数の返り値として返す値です
+    // ↓ インスタンスメソッドattackが最終的に関数の返り値として返す値を使って、「どちらも生きている場合」と、片方が生きている場合を実装してみましょう
     //console.log(`${this.name}が${defender.name}に与えたダメージは${damage}`);
   }
 
@@ -37,7 +37,6 @@ class Character {
    let damage = this.offensePower - defender.defencePower;
    if (damage <= 0) damage = 1;//ダメージ0未満なら
 
-   // インスタンスメソッドcalcAttackDamageが関数の戻り値として最終的に返す値を書くと良いですね → ヒント: インスタンスメソッドcalcAttackDamageも、関数ですから、最終的に「返す値」が必要です
    return damage;
   }
 
