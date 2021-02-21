@@ -22,21 +22,30 @@ class Character {
   /*キャラクターが死んでいる場合は攻撃出来ないので、それを表示する。死んでいない場合は相手に与えたダメージを表示。相手が死んだ場合は相手に与えたダメージと死んだことを表示する。*/
   attack(defender) {
     if (this.hp <= 0) console.log(`${this.name}は死亡したので攻撃できません`); //攻撃しているキャラが死んだ場合
-    if (defender.hp <= 0) console.log(`${defender.name}死亡したので攻撃できません`);//defenceしているキャラが死んだ場合
+    if (defender.hp <= 0) console.log(`${defender.name}は死亡したので攻撃できません`);//defenceしているキャラが死んだ場合
 
-    this.calcAttackDamage(defender);
-
-    //どちらも生きている
-
+    const damage = this.calcAttackDamage(defender);
     // ↓ インスタンスメソッドattackが最終的に関数の返り値として返す値を使って、「どちらも生きている場合」と、片方が生きている場合を実装してみましょう
-    //console.log(`${this.name}が${defender.name}に与えたダメージは${damage}`);
+
+    //片方生きている
+    if (this.hp > 0 && defender.hp <= 0) {
+      console.log(`${this.name}が${defender.name}に与えたダメージは${damage}`);
+      console.log(`${defender.name}は死亡しました`);
+    }
+    //if (defender.hp > 0 && this.hp <= 0) {
+    //}
+
+    //どちらも生きている(与えたダメージのみ表示？)
+    if (this.hp && defender.hp > 0) {
+      console.log(`${this.name}が${defender.name}に与えたダメージは${damage}`);
+    }
+
   }
 
   /*ダメージは単純に攻撃力から防御力を引いて計算する。ダメージが0未満の場合は、最低のダメージ1を与える*/
   calcAttackDamage(defender) {
    let damage = this.offensePower - defender.defencePower;
-   if (damage <= 0) damage = 1;//ダメージ0未満なら
-
+   if (damage <= 0) damage = 1;
    return damage;
   }
 
@@ -87,7 +96,7 @@ class Character {
   // })
   const monster = new Character({
     name: 'モンスター',
-    hp: 60,//60
+    hp: 0,//60
     mp: 0,
     offensePower: 30,
     defencePower: 10//10
