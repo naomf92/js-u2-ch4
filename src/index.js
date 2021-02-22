@@ -27,15 +27,15 @@ class Character {
     const damage = this.calcAttackDamage(defender);
     // ↓ インスタンスメソッドattackが最終的に関数の返り値として返す値を使って、「どちらも生きている場合」と、片方が生きている場合を実装してみましょう
 
-    //片方生きている
+    //片方生きている → 防御キャラクターのことだけdamageに関しては考えれば良いので、（攻撃キャラはdamage受けない）defenderだけ条件式に含まれていればOKです
     if (this.hp > 0 && defender.hp <= 0) {
       console.log(`${this.name}が${defender.name}に与えたダメージは${damage}`);
       console.log(`${defender.name}は死亡しました`);
-    }
+    }// elseでdamageを受けた防御キャラがまだ生きている処理を書けますね（これがどちらも生きている条件になります）
     //if (defender.hp > 0 && this.hp <= 0) {
     //}
 
-    //どちらも生きている(与えたダメージのみ表示？)
+    //どちらも生きている(与えたダメージのみ表示？) → 実はこのケースは考えなくても大丈夫です
     if (this.hp && defender.hp > 0) {
       console.log(`${this.name}が${defender.name}に与えたダメージは${damage}`);
     }
