@@ -21,25 +21,29 @@ class Character {
 
   /*キャラクターが死んでいる場合は攻撃出来ないので、それを表示する。死んでいない場合は相手に与えたダメージを表示。相手が死んだ場合は相手に与えたダメージと死んだことを表示する。*/
   attack(defender) {
-    if (this.hp <= 0) console.log(`${this.name}は死亡したので攻撃できません`); //攻撃しているキャラが死んだ場合
-    if (defender.hp <= 0) console.log(`${defender.name}は死亡したので攻撃できません`);//defenceしているキャラが死んだ場合
+    const main = document.getElementById('main');
+    const p = document.createElement('p');
 
-    const damage = this.calcAttackDamage(defender);
-    // ↓ インスタンスメソッドattackが最終的に関数の返り値として返す値を使って、「どちらも生きている場合」と、片方が生きている場合を実装してみましょう
-
-    //片方生きている → 防御キャラクターのことだけdamageに関しては考えれば良いので、（攻撃キャラはdamage受けない）defenderだけ条件式に含まれていればOKです
-    if (this.hp > 0 && defender.hp <= 0) {
-      console.log(`${this.name}が${defender.name}に与えたダメージは${damage}`);
-      console.log(`${defender.name}は死亡しました`);
-    }// elseでdamageを受けた防御キャラがまだ生きている処理を書けますね（これがどちらも生きている条件になります）
-    //if (defender.hp > 0 && this.hp <= 0) {
-    //}
-
-    //どちらも生きている(与えたダメージのみ表示？) → 実はこのケースは考えなくても大丈夫です
-    if (this.hp && defender.hp > 0) {
-      console.log(`${this.name}が${defender.name}に与えたダメージは${damage}`);
+    if (this.hp <= 0) {//攻撃しているキャラが死んだ場合
+      p.innerHTML = `${this.name}は死亡したので攻撃できません`;
+      main.appendChild(p);
     }
 
+    if (defender.hp <= 0) {//defenceしているキャラが死んだ場合
+      p.innerHTML = `${defender.name}は死亡したので攻撃できません`;
+      main.appendChild(p);
+    }
+
+    const damage = this.calcAttackDamage(defender);
+
+    if (defender.hp <= 0) {
+      p.innerHTML = `${this.name}が${defender.name}に与えたダメージは${damage}`;
+      p.innerHTML = `${defender.name}は死亡しました`;
+      main.appendChild(p);
+    } else {
+      p.innerHTML = `${defender.name}はダメージを${damage}受けました`;
+      main.appendChild(p);
+    }
   }
 
   /*ダメージは単純に攻撃力から防御力を引いて計算する。ダメージが0未満の場合は、最低のダメージ1を与える*/
@@ -82,7 +86,7 @@ class Character {
 {
   const fighter = new Character({
     name: '武道家',
-    hp: 40,//40
+    hp: 0,//40
     mp: 0,
     offensePower: 15,
     defencePower: 10//10
@@ -96,7 +100,7 @@ class Character {
   // })
   const monster = new Character({
     name: 'モンスター',
-    hp: 0,//60
+    hp: 60,//60
     mp: 0,
     offensePower: 30,
     defencePower: 10//10
