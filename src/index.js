@@ -38,6 +38,7 @@ class Character {
 
     if (defender.hp <= 0) {
       p.innerHTML = `${this.name}が${defender.name}に与えたダメージは${damage}`;
+      main.appendChild(p);
       p.innerHTML = `${defender.name}は死亡しました`;
       main.appendChild(p);
     } else {
@@ -86,7 +87,7 @@ class Character {
 {
   const fighter = new Character({
     name: '武道家',
-    hp: 0,//40
+    hp: 40,//40
     mp: 0,
     offensePower: 15,
     defencePower: 10//10
@@ -100,7 +101,7 @@ class Character {
   // })
   const monster = new Character({
     name: 'モンスター',
-    hp: 60,//60
+    hp: 0,//60
     mp: 0,
     offensePower: 30,
     defencePower: 10//10
