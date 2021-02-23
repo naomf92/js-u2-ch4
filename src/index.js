@@ -37,6 +37,7 @@ class Character {
     const damage = this.calcAttackDamage(defender);
 
     if (defender.hp <= 0) {
+      // 1つにまとめてOKです。
       p.innerHTML = `${this.name}が${defender.name}に与えたダメージは${damage}`;
       main.appendChild(p);
       p.innerHTML = `${defender.name}は死亡しました`;
