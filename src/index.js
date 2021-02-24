@@ -44,19 +44,6 @@ class Character {
       main.appendChild(p);
     }
 
-    // let hp = defender.hp ;
-    // switch (hp) {
-    //   case (hp <= 0):
-    //     p.innerHTML = `${this.name}が${defender.name}に与えたダメージは${damage}`;
-    //     p.innerHTML = `${defender.name}は死亡しました`;
-    //     main.appendChild(p);
-    //     break;
-    //   case (hp > 0):
-    //     p.innerHTML = `${defender.name}はダメージを${damage}受けました`;
-    //     main.appendChild(p);
-    //     break;
-    // }
-
   }
 
   /*ダメージは単純に攻撃力から防御力を引いて計算する。ダメージが0未満の場合は、最低のダメージ1を与える*/
