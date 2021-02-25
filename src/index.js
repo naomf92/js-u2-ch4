@@ -26,11 +26,11 @@ class Character {
 
     if (this.hp <= 0) {//攻撃しているキャラが死んだ場合
       p.innerHTML = `${this.name}は死亡したので攻撃できません`;
-      main.appendChild(p);
+      return main.appendChild(p);
     }
     if (defender.hp <= 0) {//defenceしているキャラが死んだ場合
       p.innerHTML = `${defender.name}は死亡したので攻撃できません`;
-      main.appendChild(p);
+      return main.appendChild(p);
     }
 
     const damage = this.calcAttackDamage(defender);
@@ -86,7 +86,7 @@ class Character {
 {
   const fighter = new Character({
     name: '武道家',
-    hp: 0,//40
+    hp: 40,//40
     mp: 0,
     offensePower: 15,
     defencePower: 10//10
