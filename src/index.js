@@ -38,9 +38,11 @@ class Character {
     if (defender.hp <= 0) {
       p.innerHTML = `${this.name}が${defender.name}に与えたダメージは${damage}`;
       p.innerHTML = `${defender.name}は死亡しました`;
+      // この場合も、上記のifブロックの意味が少し薄れるので、return文はなくて良いと思います
       return main.appendChild(p);
     } else {
       p.innerHTML = `${defender.name}はダメージを${damage}受けました`;
+      // この場合はreturnして処理を終えると、後の処理が続かないので、return文はなくて良いと思います
       return main.appendChild(p);
     }
 
