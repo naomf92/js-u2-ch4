@@ -38,10 +38,10 @@ class Character {
     if (defender.hp <= 0) {
       p.innerHTML = `${this.name}が${defender.name}に与えたダメージは${damage}`;
       p.innerHTML = `${defender.name}は死亡しました`;
-      main.appendChild(p);
+      return main.appendChild(p);
     } else {
       p.innerHTML = `${defender.name}はダメージを${damage}受けました`;
-      main.appendChild(p);
+      return main.appendChild(p);
     }
 
   }
