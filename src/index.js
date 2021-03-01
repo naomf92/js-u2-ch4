@@ -57,31 +57,39 @@ class Character {
 
 //以下のインスタンス化されたCharacterの記述が呼び出しになります
 
-// class Sorcerer extends Character {
-//   constructor() {
+class Sorcerer extends Character {
+  constructor(props) {
+    super(props);
+  }
 
-//   }
+  /*回復魔法は3のMPを消費する。相手のHPを15回復する。魔法使いが死んでいる場合はその旨を表示する。相手が死んでいる場合は回復が出来ないためその旨を表示する。MPが足りない場合はその旨を表示する。*/
+  healSpell(target) {
+    if (this.hp <= 0) {//魔法使いが死んでいる場合
+      return console.log(`${this.name}は死んでいるので効果はありません`);
+    }
+    if (target.hp <= 0) {//相手が死んでいる場合
+      return console.log(`${target.name}は死んでいるので効果はありません`);
+    }
+    if (this.mp < 3) {//MPが足りない場合
+      return console.log(`${this.name}のMPは足りません`);
+    }
 
-//   healSpell(target) {
-//     /*
-//       回復魔法は3のMPを消費する。
-//       相手のHPを15回復する。
-//       魔法使いが死んでいる場合はその旨を表示する。
-//       相手が死んでいる場合は回復が出来ないためその旨を表示する。
-//       MPが足りない場合はその旨を表示する。
-//     */
-//   }
+    let mp = this.mp - 3;//3のMPを消費する
+    console.log(mp);
+    let hp = target.hp + 15;//相手のHPを15回復する
+    console.log(hp);
+  }
 
-//   fireSpell(target) {
-//     /*
-//       攻撃魔法は2のMPを消費する。
-//       相手に10のダメージを与える。
-//       魔法使いが死んでいる場合はその旨を表示する。
-//       相手が死んでいる場合は攻撃が出来ないためその旨を表示する。
-//       MPが足りない場合はその旨を表示する。
-//     */
-//   }
-// }
+  fireSpell(target) {
+    /*
+      攻撃魔法は2のMPを消費する。
+      相手に10のダメージを与える。
+      魔法使いが死んでいる場合はその旨を表示する。
+      相手が死んでいる場合は攻撃が出来ないためその旨を表示する。
+      MPが足りない場合はその旨を表示する。
+    */
+  }
+}
 
 {
   const fighter = new Character({
@@ -91,13 +99,13 @@ class Character {
     offensePower: 15,
     defencePower: 10//10
   })
-  // const sorcerer = new Sorcerer({
-  //   name: '魔法使い',
-  //   hp: 25,
-  //   mp: 10,
-  //   offensePower: 8,
-  //   defencePower: 10
-  // })
+  const sorcerer = new Sorcerer({
+    name: '魔法使い',
+    hp: 25,//25
+    mp: 10,//10
+    offensePower: 8,
+    defencePower: 10
+  })
   const monster = new Character({
     name: 'モンスター',
     hp: 60,//60
@@ -109,11 +117,11 @@ class Character {
   //fighter.attack(monster);
   // sorcerer.attack(monster);
   // monster.attack(sorcerer);
-  fighter.attack(monster);
-  //sorcerer.healSpell(sorcerer);
-  monster.attack(fighter);
   //fighter.attack(monster);
-  // sorcerer.fireSpell(monster);
+  sorcerer.healSpell(sorcerer);
+  //monster.attack(fighter);
+  //fighter.attack(monster);
+  //sorcerer.fireSpell(monster);
   //monster.attack(fighter);
   fighter.showStatus();
   // sorcerer.showStatus();
