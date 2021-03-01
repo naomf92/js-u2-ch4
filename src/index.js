@@ -74,8 +74,11 @@ class Sorcerer extends Character {
       return console.log(`${this.name}のMPは足りません`);
     }
 
+    // this.mpがconstructorメソッド内にあるので、新しく変数宣言するのではなく、this.mpに代入すると良いですね
     let mp = this.mp - 3;//3のMPを消費する
     console.log(mp);
+
+    // こちらも形式を揃えてthis.targetに代入する形を取ると、可読性が上がります
     let hp = target.hp + 15;//相手のHPを15回復する
     console.log(hp);
   }
