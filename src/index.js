@@ -64,23 +64,25 @@ class Sorcerer extends Character {
 
   /*回復魔法は3のMPを消費する。相手のHPを15回復する。魔法使いが死んでいる場合はその旨を表示する。相手が死んでいる場合は回復が出来ないためその旨を表示する。MPが足りない場合はその旨を表示する。*/
   healSpell(target) {
+    const main = document.getElementById('main');
+    const p = document.createElement('p');
+
     if (this.hp <= 0) {//魔法使いが死んでいる場合
-      return console.log(`${this.name}は死んでいるので効果はありません`);
+      p.innerHTML = `${this.name}は死んでいるので効果はありません`;
+      return main.appendChild(p);
     }
     if (target.hp <= 0) {//相手が死んでいる場合
-      return console.log(`${target.name}は死んでいるので効果はありません`);
+      p.innerHTML = `${target.name}は死んでいるので効果はありません`;
+      return main.appendChild(p);
     }
-    if (this.mp < 3) {//MPが足りない場合
-      return console.log(`${this.name}のMPは足りません`);
+    if (this.mp >= 3) {
+      this.mp = this.mp - 3;
+      target.hp = target.hp + 15;
+      p.innerHTML = `${target.name}のhpを15回復しました`;
+    } else {
+      p.innerHTML = `${this.name}のMPは足りません`;
     }
-
-    // this.mpがconstructorメソッド内にあるので、新しく変数宣言するのではなく、this.mpに代入すると良いですね
-    let mp = this.mp - 3;//3のMPを消費する
-    console.log(mp);
-
-    // こちらも形式を揃えてthis.targetに代入する形を取ると、可読性が上がります
-    let hp = target.hp + 15;//相手のHPを15回復する
-    console.log(hp);
+    return main.appendChild(p);
   }
 
   fireSpell(target) {
@@ -105,7 +107,7 @@ class Sorcerer extends Character {
   const sorcerer = new Sorcerer({
     name: '魔法使い',
     hp: 25,//25
-    mp: 10,//10
+    mp: 0,//10
     offensePower: 8,
     defencePower: 10
   })
@@ -121,12 +123,12 @@ class Sorcerer extends Character {
   // sorcerer.attack(monster);
   // monster.attack(sorcerer);
   //fighter.attack(monster);
-  sorcerer.healSpell(sorcerer);
+  sorcerer.healSpell(fighter);
   //monster.attack(fighter);
   //fighter.attack(monster);
   //sorcerer.fireSpell(monster);
   //monster.attack(fighter);
   fighter.showStatus();
-  // sorcerer.showStatus();
+  sorcerer.showStatus();
   monster.showStatus();
 }
