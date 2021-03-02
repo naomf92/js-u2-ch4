@@ -85,14 +85,32 @@ class Sorcerer extends Character {
     return main.appendChild(p);
   }
 
+  /*攻撃魔法は2のMPを消費する。相手に10のダメージを与える。魔法使いが死んでいる場合はその旨を表示する。相手が死んでいる場合は攻撃が出来ないためその旨を表示する。MPが足りない場合はその旨を表示する。*/
   fireSpell(target) {
-    /*
-      攻撃魔法は2のMPを消費する。
-      相手に10のダメージを与える。
-      魔法使いが死んでいる場合はその旨を表示する。
-      相手が死んでいる場合は攻撃が出来ないためその旨を表示する。
-      MPが足りない場合はその旨を表示する。
-    */
+    const main = document.getElementById('main');
+    const p = document.createElement('p');
+
+    if (this.hp <= 0) {//魔法使いが死んでいる場合
+      p.innerHTML = `${this.name}は死んでいるので攻撃できません`;
+      return main.appendChild(p);
+    }
+    if (target.hp <= 0) {//相手が死んでいる場合
+      p.innerHTML = `${target.name}は死んでいるので攻撃できません`;
+      return main.appendChild(p);
+    }
+    //MPが足りない場合はその旨を表示する。/攻撃魔法は2のMPを消費する。/相手に10のダメージを与える。
+    if (this.mp >= 3) {
+      this.mp = this.mp - 2;
+
+      //damage
+      //let damage = this.offensePower - defender.defencePower;
+      //damage = 10;
+
+      p.innerHTML = `${target.name}はダメージを10受けました`;
+    } else {
+      p.innerHTML = `${this.name}のMPは足りません`;
+    }
+    return main.appendChild(p);
   }
 }
 
@@ -107,7 +125,7 @@ class Sorcerer extends Character {
   const sorcerer = new Sorcerer({
     name: '魔法使い',
     hp: 25,//25
-    mp: 0,//10
+    mp: 10,//10
     offensePower: 8,
     defencePower: 10
   })
@@ -123,10 +141,10 @@ class Sorcerer extends Character {
   // sorcerer.attack(monster);
   // monster.attack(sorcerer);
   //fighter.attack(monster);
-  sorcerer.healSpell(fighter);
+  //sorcerer.healSpell(sorcerer);
   //monster.attack(fighter);
   //fighter.attack(monster);
-  //sorcerer.fireSpell(monster);
+  sorcerer.fireSpell(monster);
   //monster.attack(fighter);
   fighter.showStatus();
   sorcerer.showStatus();
