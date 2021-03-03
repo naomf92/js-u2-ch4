@@ -55,8 +55,6 @@ class Character {
 
 }
 
-//以下のインスタンス化されたCharacterの記述が呼び出しになります
-
 class Sorcerer extends Character {
   constructor(props) {
     super(props);
@@ -101,11 +99,7 @@ class Sorcerer extends Character {
     //MPが足りない場合はその旨を表示する。/攻撃魔法は2のMPを消費する。/相手に10のダメージを与える。
     if (this.mp >= 3) {
       this.mp = this.mp - 2;
-
-      //damage
-      //let damage = this.offensePower - defender.defencePower;
-      //damage = 10;
-
+      target.mp = target.mp - 10;//damage?
       p.innerHTML = `${target.name}はダメージを10受けました`;
     } else {
       p.innerHTML = `${this.name}のMPは足りません`;
@@ -118,7 +112,7 @@ class Sorcerer extends Character {
   const fighter = new Character({
     name: '武道家',
     hp: 40,//40
-    mp: 0,
+    mp: 0,//0
     offensePower: 15,
     defencePower: 10//10
   })
@@ -132,9 +126,9 @@ class Sorcerer extends Character {
   const monster = new Character({
     name: 'モンスター',
     hp: 60,//60
-    mp: 0,
+    mp: 0,//0
     offensePower: 30,
-    defencePower: 10//10
+    defencePower: 10
   })
 
   //fighter.attack(monster);
