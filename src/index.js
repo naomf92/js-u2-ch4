@@ -97,7 +97,7 @@ class Sorcerer extends Character {
       return main.appendChild(p);
     }
     //MPが足りない場合はその旨を表示する。/攻撃魔法は2のMPを消費する。/相手に10のダメージを与える。
-    if (this.mp >= 3) {
+    if (this.mp >= 3) { // this.mp >= 2 です
       this.mp = this.mp - 2;
       target.mp = target.mp - 10;//damage?
       p.innerHTML = `${target.name}はダメージを10受けました`;
