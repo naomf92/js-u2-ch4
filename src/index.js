@@ -97,9 +97,9 @@ class Sorcerer extends Character {
       return main.appendChild(p);
     }
     //MPが足りない場合はその旨を表示する。/攻撃魔法は2のMPを消費する。/相手に10のダメージを与える。
-    if (this.mp >= 3) { // this.mp >= 2 です
+    if (this.mp >= 2) {
       this.mp = this.mp - 2;
-      target.mp = target.mp - 10;//damage?
+      target.mp = target.mp - 10;
       p.innerHTML = `${target.name}はダメージを10受けました`;
     } else {
       p.innerHTML = `${this.name}のMPは足りません`;
@@ -111,35 +111,35 @@ class Sorcerer extends Character {
 {
   const fighter = new Character({
     name: '武道家',
-    hp: 40,//40
-    mp: 0,//0
+    hp: 40,
+    mp: 0,
     offensePower: 15,
-    defencePower: 10//10
+    defencePower: 10
   })
   const sorcerer = new Sorcerer({
     name: '魔法使い',
-    hp: 25,//25
-    mp: 10,//10
+    hp: 25,
+    mp: 10,
     offensePower: 8,
     defencePower: 10
   })
   const monster = new Character({
     name: 'モンスター',
-    hp: 60,//60
-    mp: 0,//0
+    hp: 60,
+    mp: 0,
     offensePower: 30,
     defencePower: 10
   })
 
-  //fighter.attack(monster);
-  // sorcerer.attack(monster);
-  // monster.attack(sorcerer);
-  //fighter.attack(monster);
-  //sorcerer.healSpell(sorcerer);
-  //monster.attack(fighter);
-  //fighter.attack(monster);
+  fighter.attack(monster);
+  sorcerer.attack(monster);
+  monster.attack(sorcerer);
+  fighter.attack(monster);
+  sorcerer.healSpell(sorcerer);
+  monster.attack(fighter);
+  fighter.attack(monster);
   sorcerer.fireSpell(monster);
-  //monster.attack(fighter);
+  monster.attack(fighter);
   fighter.showStatus();
   sorcerer.showStatus();
   monster.showStatus();
